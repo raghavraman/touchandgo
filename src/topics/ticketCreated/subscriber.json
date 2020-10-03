@@ -1,0 +1,12 @@
+{
+    "services": [
+        {
+            "name": "telegram",
+            "path": "/getevents"
+        },
+        {
+            "name": "whatsapp",
+            "path": "/getevents"
+        }
+    ]
+}

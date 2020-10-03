@@ -1,0 +1,16 @@
+{
+    "services": [
+        {
+            "name": "telegram",
+            "path": "/getevents"
+        },
+        {
+            "name": "whatsapp",
+            "path": "/getevents",
+            "action": {
+                "name": "filter",
+                "params": ["user_id", "created_at"]
+            }
+        }
+    ]
+}
