@@ -1,3 +1,4 @@
+const fs = require("fs");
 const listOfTopics = [
   "ticketCompleted",
   "ticketCreated",
@@ -6,19 +7,20 @@ const listOfTopics = [
   "ticketRefined",
 ];
 
-class Topics {
+class Topic {
   constructor(name) {
-    this.subcribers = this.getTopicSubscriber(name);
+    this.name = name;
+    this.subcribers = this.getTopicSubscribers(name);
   }
 
   getTopicSubscribers(name) {
-    if (this.isTopicAvailable(name)) {
+    if (!this.isTopicAvailable(name)) {
       return null;
     }
 
-    let path = `./${name}/subscriber.json`;
+    let path = `/${name}/subscriber.json`;
     try {
-      return JSON.parse(fs.readFileSync(path));
+      return JSON.parse(fs.readFileSync(__dirname + path)).services;
     } catch (err) {
       console.log(`Error reading subcriber for Topic: ${name}`);
       console.log(err);
@@ -31,4 +33,4 @@ class Topics {
   }
 }
 
-module.exports = Topics;
+module.exports = Topic;
