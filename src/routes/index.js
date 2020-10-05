@@ -6,6 +6,8 @@ router.get('/incoming', eventsController.incommingEvents);
 
 router.get('/outgoing',eventsController.outgoingEvents);
 
+router.get('/:topic', eventsController.handleEvents);
+
 router.get('/view',eventsController.viewEvents);
 
 module.exports = router;
