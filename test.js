@@ -1,44 +1,17 @@
-const fs = require("fs");
 const util = require("util");
+const Topic = require('./src/topics/topic')
+const EventsProcessor = require('./src/services/eventsProcessor')
 
-const listOfTopics = [
-  "ticketCompleted",
-  "ticketCreated",
-  "ticketInProgress",
-  "ticketInReview",
-  "ticketRefined",
-];
-
-class Topics {
-  constructor(name) {
-    this.name = name;
-    this.subcribers = this.getTopicSubscribers(name);
-  }
-
-  isTopicAvailable(name) {
-    return listOfTopics.includes(name);
-  }
-
-  getTopicSubscribers(name) {
-    if (!this.isTopicAvailable(name)) {
-      return null;
-    }
-
-    let path = `./src/topics/${name}/subscriber.json`;
-    try {
-      return JSON.parse(fs.readFileSync(path));
-    } catch (err) {
-      // console.log(err);
-      return null;
-    }
-  }
-
-  getEverything() {
-    console.log(util.inspect(this, { depth: null }));
-  }
+const topic = new Topic("ticketCompleted");
+const message = {
+  "name": "Raghav",
+  "work": "Covermymeds",
+  "city": "Columbus"
 }
 
-module.exports = Topics;
+const processor = new EventsProcessor(message, topic);
 
-const test = new Topics("ticketCompleted");
-test.getEverything();
+console.log(util.inspect(topic, { depth: null }));
+console.log(util.inspect(processor, { depth: null }));
+processor.process();
+
