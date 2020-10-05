@@ -1,11 +1,9 @@
-const express = require("express"),
-    bodyParser = require("body-parser");
-
-
+const express = require("express");
+const port = process.env.PORT || 3000;
 //Create app and use body-parser
 const app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 //Allow cross orgin requests
 app.use(function(req, res, next) {
@@ -17,4 +15,6 @@ app.use(function(req, res, next) {
 app.use(require('./routes'));
 
 
-app.listen(process.env.PORT || 3000);
+app.listen(port, () => {
+    console.log(`Touch and Go started. vist http://localhost:${port}`)
+})
